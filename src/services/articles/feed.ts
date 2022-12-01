@@ -13,5 +13,7 @@ export const feed = (token: string | null) => async (): Promise<MultipleArticles
 
   const json = await head.json();
 
+  console.log({json})
+
   return json;
 };

@@ -18,6 +18,8 @@ export const onGet: RequestHandler = async ({ request }) => {
     isAuthenticated() && feed(token)(),
   ]);
 
+  console.log(feedData)
+
   return {
     ...tagsData,
     ...articlesData,
@@ -63,7 +65,7 @@ export default component$(() => {
                 data && (
                   <>
                   {data.articles.map((article: Article)  => (
-                    <div class="article-preview">
+                    <div class="article-preview" key={article.slug}>
                     <div class="article-meta">
                       <Link href="profile.html">
                         <img src={article.author.image} />
@@ -103,8 +105,8 @@ export default component$(() => {
                   onResolved={(data: any) =>
                     data && (
                       <>
-                        {data.tags.map((tagName: string) => (
-                          <Link href="" class="tag-pill tag-default">
+                        {data.tags.map((tagName: string, index: number) => (
+                          <Link href="" key={`${tagName}-${index}`} class="tag-pill tag-default">
                             {tagName}
                           </Link>
                         ))}
